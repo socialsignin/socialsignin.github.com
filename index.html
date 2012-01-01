@@ -35,111 +35,40 @@
 
   <div id="container">
 
-    <div class="download">
-      <a href="http://github.com/socialsignin/spring-social-security/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
-      <a href="http://github.com/socialsignin/spring-social-security/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
-    </div>
+  
 
     <h1><a href="http://github.com/socialsignin">The SocialSignIn project</a></h1>
 
     <div class="description">
-    Delegating the authentication and security of your application to Spring Social
+    Delegating the authentication and security of your application to SaaS providers using Spring Social
 
     </div>
 
-    <p>     Many applications using Spring Security for authentication will need to:
+   <h2>SocialSignIn Audience</h2>
+<p>Java/Spring developers creating websites which require login functionality and which need to connect to 3rd party APIs.</p>
 
-<ul>
-    <li>Ask users to sign up using a username and password.</li>
-    <li>Create their own user details store and data access objects</li>
-    <li>Provide account management (eg. forgotten password functionality)</li>
-    <li>Provide access control for protected resources</li>
-</ul>
+<h2>
+SocialSignIn Aims</h2>
+<p>To remove need for local username/password combinations and local user management by delegating login to 3rd party.</p>
 
-For applications which already use spring-social to connect with external authenticated apis (eg. Facebook, Twitter) ,  
-SocialSignIn’s spring-social-security module removes these authentication concerns by delegating 
-authentication in Spring Security via spring-social to the third party api.
-
-Authenticating your website users via spring-social api providers means:
-<ul>
-
-    <li>No need for users to remember another password for another site.</li>
-    <li>No need for developers to create their own user details store, as the store used by spring-social is 
-    used instead.</li>
-    <li>No need for developers to provide account management as this is provided by the third party api.</li>
-    <li>SpringSocialSecurity can be easily customised to delegate access control decisions to third party api</li>
-</ul></p>
+			<p> To re-use as much of the existing Spring framework as possible, building on Spring Social modules.</p>
+	        	 
+			<p> To allow a sample applications with login/connection to chosen 3rd party providers to be created quickly and easily, using latest release versions
+			 of Spring, Spring Security and Spring Social</p>
     
-    <!--
     <h2>Dependencies</h2>
-<p>Deps</p>
--->
-<h2>Install</h2>
-
-<p>Build and install locally using mvn install</p>
-<p>Add spring-social-security as a dependency for your webapp</p>
+	<p>Spring Framework 3.1.0, Spring Security 3.1.0, Spring Social 1.0.1, <a href="https://github.com/socialsignin/spring-social-security">Spring Social Security 1.0.1-SNAPSHOT</a>, <a href="https://github.com/socialsignin/socialsignin-provider">SocialSignIn Providers 1.0.1-SNAPSHOT</a></p>
+    <h2>Getting started</h2>
 
 
-<p>For a simple "Hello World" app demonstrating spring-social-security see:
+<p>Checkout our <a href="https://github.com/socialsignin/socialsignin-showcase">SocialSignIn Showcase</a> project, or use our <a href="https://github.com/socialsignin/mvn-archetype-socialsignin-webapp">SocialSignIn Maven Archetype</a> to create your own sample application.
 
-<a href="https://github.com/socialsignin/spring-social-security-demo">https://github.com/socialsignin/spring-social-security-demo</a></p>
-<p>To delegate the authentication for your app to Spring-Social, a number of spring beans must be set up.</p>
+<p>All non-standard dependencies are deployed to the <a href="https://github.com/OpenSourceAgility/opensourceagility-mvn-repo">OpenSourceAgility maven repository</a></p>
 
-<p>To use the default beans/implementations/configuration, simply component scan:</p>
 
- <p>   &lt;context:component-scan base-package="org.socialsignin.springframework.social.security" /&gt;</p>
 
- <p> and register springSocialSecurityAuthenticationFilter as a custom filter in place of FORM_LOGIN_FILTER.</p>
-
-<p>    &lt;security:custom-filter position="FORM_LOGIN_FILTER" ref="springSocialSecurityAuthenticationFilter" /&gt;</p>
-
-<p>Also configure the entry-point for your app's authentication to be the page from which users can login/connect
-with a Spring-Social provider (usually a page with a form submit to ProviderSignInController or ConnectController), 
-and configure an environmental property (socialsignin.signUpView) for a page where user can choose a username 
-when creating an account which posts a "userId" to the url "/signup" (handled by SpringSocialSecuritySignUpController)</p>
-
-<p>For example:</p>
-
-<p>&lt;bean id="springSocialSecurityEntryPoint"
-  class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint"&gt;
-
- &lt;property name="loginFormUrl" value="/oauthlogin.jsp"/&gt;
-&lt;/bean&gt;</p>
-
-<p>&lt;security:http use-expressions="true" entry-point-ref="springSocialSecurityEntryPoint" ....</p>
-
-<p>As an alternative to component-scanning for the default implementations, you have the option to register your
-own beans/provide custom implementations.</p>
-
-<p>The classes which are registered as beans by default through component-scanning are:</p>
-<p><ul>
-<li>SpringSocialSecurityAuthenticationFilter (required)</li>
-
-<li>SpringSocialSecuritySignInService (required)</li>
-
-<li>SpringSocialSecurityUserDetailsService (required)</li>
-
-<li>SimpleUserAuthoritiesService (one implementation of UserAuthoritiesService is required)</li>
-
-<li>SpringSocialSecuritySignUpController (optional - for handling UI for creating new local accounts - alternative controllers could
-be used instead)</li>
-
-<li>SpringSocialSecurityConnectionSignUp (optional - for implictly creating new local accounts. If used, the SpringSocialSecurityJdbcUsersConnectionRepository
-must be used in place of standard JdbcUsersConnectionRepository to workaround and issue with JdbcUsersConnectionRepository
-not handling null return values from ConnectionSignUp's properly)</li>
-  
-  
-  </ul>
-
-  
-  
-</p>
-<!--
 <h2>License</h2>
-<p>Licence</p>
--->
+<p>http://www.apache.org/licenses/LICENSE-2.0</p>
 <h2>Authors</h2>
 <p>Michael Lavelle (michael@lavelle.name)
 <br/>      </p>
@@ -147,23 +76,6 @@ not handling null return values from ConnectionSignUp's properly)</li>
 <p> (michael@lavelle.name)
 <br/>      </p>
 
-
-    <h2>Download</h2>
-
-    <p>
-      You can download this project in either
-      <a href="http://github.com/socialsignin/spring-social-security/zipball/master">zip</a> or
-      <a href="http://github.com/socialsignin/spring-social-security/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/socialsignin/spring-social-security</pre>
-
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/socialsignin/spring-social-security">socialsignin/spring-social-security</a>
-    </div>
 
   </div>
 
